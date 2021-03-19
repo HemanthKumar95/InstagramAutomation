@@ -1,9 +1,9 @@
 from seleniumbase import BaseCase
 
-from Insta_Automation.InstagramAutomation.helpers_ops import Insta_Helpers
+from helpers_ops.helpers import Insta_Helpers
 
 
-class FacebookLoginPage():
+class FacebookLoginPage:
     # Login page locators
     login_username = "#email"
     login_password = "#pass"

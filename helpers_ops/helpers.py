@@ -3,7 +3,7 @@ class Insta_Helpers:
 
     @staticmethod
     def change_username(username: str) -> None:
-        fin = open("fetchUserFollowData.js", "rt")
+        fin = open("/InstagramAutomation/helpers_ops/fetchUserFollowData.js", "rt")
         temp = []
         for line in fin:
             if(line.find('let username') != -1):
@@ -12,7 +12,7 @@ class Insta_Helpers:
         
         fin.close()
 
-        fout = open("fetchUserFollowData.js", "wt")
+        fout = open("/InstagramAutomation/helpers_ops/fetchUserFollowData.js", "wt")
 
         for line in temp:
             fout.writelines(line)

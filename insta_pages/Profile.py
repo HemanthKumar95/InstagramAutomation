@@ -1,7 +1,8 @@
 from seleniumbase import BaseCase
 
-from Insta_Automation.InstagramAutomation.insta_pages.Posts import Posts
-from Insta_Automation.InstagramAutomation.helpers_ops import Insta_Helpers
+from helpers_ops.helpers import Insta_Helpers
+from insta_pages.Posts import Posts
+
 
 class Profile(BaseCase):
     insta_username = '//h1'
@@ -16,7 +17,7 @@ class Profile(BaseCase):
 
     @staticmethod
     def get_no_of_posts(sbase: BaseCase):
-        return sbase.get_text(Profile.no_of_posts, timeout=3).replace(",","")
+        return sbase.get_text(Profile.no_of_posts, timeout=3).replace(",", "")
 
     @staticmethod
     def get_no_of_followers(sbase: BaseCase):
@@ -55,18 +56,17 @@ class Profile(BaseCase):
     @staticmethod
     def like_all_posts(sbase: BaseCase, max_limit: int):
         try:
-            counter=0
-            while counter!=max_limit:
+            counter = 0
+            while counter != max_limit:
                 Posts.like_a_post(sbase)
                 if not sbase.is_element_visible(Posts.post_next):
                     break
                 Posts.move_to_next_post(sbase)
-                counter+=1
+                counter += 1
         finally:
             Posts.close_the_post(sbase)
 
     @staticmethod
     def fetch_user_follow_data(sbase: BaseCase, username: str):
         Insta_Helpers.change_username(username)
-        sbase.execute_script(open("/Insta_Automation/InstagramAutomation/helpers_ops/fetchUserFollowData.js").read())
-
+        sbase.execute_script(open("/InstagramAutomation/helpers_ops/fetchUserFollowData.js").read())

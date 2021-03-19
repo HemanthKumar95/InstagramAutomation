@@ -1,11 +1,10 @@
 from seleniumbase import BaseCase
 
-from Insta_Automation.InstagramAutomation.constants import INSTAGRAM_URL
-from FolderOne.Sample import LoginPage
-from Insta_Automation.InstagramAutomation.insta_pages.HomePage import HomePage
-from Insta_Automation.InstagramAutomation.insta_pages.Login import Login
-from Insta_Automation.InstagramAutomation.insta_pages.Profile import Profile
-
+from constants import INSTAGRAM_URL
+from insta_pages.Login import Login
+from insta_pages.Profile import Profile
+from insta_pages.HomePage import HomePage
+from helpers_ops.google_insta import GoogleInsta
 
 class AutomateLogin(BaseCase):
     go_with_last_user = False
@@ -13,7 +12,8 @@ class AutomateLogin(BaseCase):
     def login(self, username, password):
 
         self.open(INSTAGRAM_URL)
-
+        GoogleInsta.navigate_to_insta(self)
+        print(self.get_title())
         if self.is_element_present(Login.login_last_user) and self.go_with_last_user:
             Login.login_as_last_user(self)
         elif self.is_element_present(Login.login_last_user) and not self.go_with_last_user:
@@ -22,7 +22,7 @@ class AutomateLogin(BaseCase):
         elif not self.go_with_last_user:
             Login.login_using_credentials(self, username, password)
         else:
-            LoginPage.login_with_facebook(self, username, password)
+            Login.login_with_facebook(self, username, password)
         self.wait(5)
 
         HomePage.presence_not_now(self)

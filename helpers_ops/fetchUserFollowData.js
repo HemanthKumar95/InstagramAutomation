@@ -1,5 +1,5 @@
 async function getData() {
-let username = "gowti_photography"
+let username = "hemanthkumar_95"
     try {
         let followers = [], followings = []
         let res = await fetch(`https://www.instagram.com/${username}/?__a=1`)
